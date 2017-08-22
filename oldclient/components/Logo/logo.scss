@@ -1,0 +1,13 @@
+.logo {
+  img {
+    display: block;
+  }
+
+  &.-quarter img {
+    width: 25%;
+  }
+
+  &.-center img {
+    margin: auto;
+  }
+}

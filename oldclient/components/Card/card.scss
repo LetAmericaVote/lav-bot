@@ -1,0 +1,35 @@
+@import '../../toolbox.scss';
+
+.card {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+
+  &.-rounded {
+    border-radius: $border-radius;
+  }
+
+  &.-padded {
+    padding: $spacing;
+  }
+
+  &.-outline {
+    box-shadow: $box-shadow;
+  }
+
+  &.-white-bg {
+    background-color: $white;
+  }
+
+  &.-light-bg {
+    background-color: $light-gray;
+  }
+
+  &.-margin {
+    margin: $spacing 0;
+  }
+
+  &.center {
+    margin: auto;
+  }
+}

@@ -1,0 +1,8 @@
+@import '../../toolbox.scss';
+
+.error {
+  color: $dark-red;
+  font-weight: $font-weight-heavy;
+  font-size: $font-regular;
+  margin: $half-spacing 0;
+}

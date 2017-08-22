@@ -1,0 +1,3 @@
+web: nodemon server/index.js --ignore 'client/*' --ignore 'dist/*'
+webpack: webpack --watch --colors
+mongo: mongod --port 2345

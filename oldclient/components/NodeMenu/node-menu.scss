@@ -1,0 +1,20 @@
+@import '../../toolbox.scss';
+
+.node-menu {
+  position: relative;
+
+  .node-menu__close {
+    position: absolute;
+    top: -$spacing;
+    right: -$half-spacing;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .node-menu__fields {
+    margin-top: $spacing;
+    margin-bottom: $spacing * 2;
+  }
+}

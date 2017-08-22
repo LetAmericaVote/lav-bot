@@ -1,0 +1,55 @@
+@import '../../toolbox.scss';
+
+.column {
+  width: $column-width;
+  height: 100%;
+  display: inline-block;
+  vertical-align: top;
+  overflow-y: scroll;
+  flex: none;
+
+  .column__container {
+    height: 100%;
+  }
+
+  &.-spacing {
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  &.-rounded .column__container {
+    border-radius: $border-radius;
+  }
+
+  &.-padding .column__container {
+    padding: $spacing;
+    box-sizing: border-box;
+  }
+
+  &.-light-bg .column__container {
+    background-color: $white;
+  }
+
+  &.-overflow .column__container {
+    overflow-y: scroll;
+  }
+}
+
+.column-full {
+  background-color: $dark-cyan;
+  position: relative;
+  height: 100%;
+  overflow: scroll;
+
+  &.-shadow {
+    box-shadow: 1px 0 5px 0px $black;
+  }
+
+  .column-full__header {
+    padding-top: $spacing;
+  }
+
+  .column-full__main {
+    padding: $half-spacing $spacing;
+  }
+}

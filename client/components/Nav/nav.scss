@@ -1,0 +1,16 @@
+@import '../../toolbox.scss';
+
+.nav {
+  height: $spacing * 3;
+  background-color: $dark-cyan;
+  padding: $half-spacing $spacing;
+  box-sizing: border-box;
+
+  .nav__logo {
+    background-image: url('./icon.png');
+    background-size: cover;
+    height: $spacing * 2;
+    width: $spacing * 3;
+    display: inline-block;
+  }
+}

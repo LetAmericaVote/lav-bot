@@ -1,0 +1,39 @@
+@import '../../toolbox.scss';
+
+.text-form {
+  .text-form__group {
+    margin-top: $spacing;
+    margin-bottom: $spacing * 2;
+  }
+
+  label {
+    font-size: $font-small;
+    color: $dark-gray;
+    display: block;
+  }
+
+  input {
+    font-size: $font-regular;
+    font-family: $font-family;
+    color: $black;
+    border: none;
+    border-bottom: 1px solid $dark-cyan;
+    outline: none;
+
+    &:focus {
+      border-bottom: 1px solid $cyan;
+    }
+  }
+
+  input[type="text"], input[type="password"], input[type="search"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding-top: $half-spacing;
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 4em;
+    font-size: 1rem;
+  }
+}
