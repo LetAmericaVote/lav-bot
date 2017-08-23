@@ -1,5 +1,5 @@
 const express = require('express');
-const db = require('monk')(process.env.MONGO_URI);
+const db = require('monk')(process.env.MONGODB_URI);
 
 const FindOnePlugin = require('../plugins/FindOne');
 const CreatePlugin = require('../plugins/Create');
