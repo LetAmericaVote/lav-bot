@@ -4,7 +4,7 @@ import { toggleCard } from '../../actions';
 
 const Card = ({ children, title, card, id, toggleCard, deleteItem }) => {
   if (! card) return null;
-  
+
   return (
     <div className={`card ${card.expand ? '-expand' : ''}`}>
       <div className="card__title" onClick={() => toggleCard(id)}>

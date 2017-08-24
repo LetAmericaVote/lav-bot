@@ -16,7 +16,7 @@ const ensureCard = (cardId, state) => {
     };
   }
 
-  return state;
+  return { ...state };
 };
 
 const card = (state = {}, action) => {
@@ -26,12 +26,20 @@ const card = (state = {}, action) => {
 
   switch(type) {
     case EXPAND_CARD:
-      const newState = { ...safeState };
-      for (const id of Object.keys(newState.items)) {
-        newState.items[id].expand = id === cardId ? true : false;
-      }
+      return {
+        ...safeState,
+        items: Object.keys(safeState.items).reduce((items, id) => {
+          const card = safeState.items[id];
 
-      return newState;
+          return {
+            ...items,
+            [id]: {
+              ...card,
+              expand: id === cardId,
+            },
+          };
+        }, {}),
+      };
 
     case CLOSE_CARD:
       return {
