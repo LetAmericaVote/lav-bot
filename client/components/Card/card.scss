@@ -1,0 +1,46 @@
+@import '../../toolbox.scss';
+
+.card {
+  background: $white;
+  box-shadow: $box-shadow;
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid $light-gray;
+
+  .card__title, .card__container {
+    padding: $spacing;
+  }
+
+  .card__title {
+    h3, .card__delete {
+      user-select: none;
+      display: inline-block;
+    }
+
+    .card__delete {
+      float: right;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .card__container {
+    display: none;
+  }
+
+  &.-expand {
+    .card__title {
+      border-bottom: 1px solid $light-gray;
+
+      h3 {
+        font-weight: $font-weight-normal;
+      }
+    }
+
+    .card__container {
+      display: block;
+    }
+  }
+}
