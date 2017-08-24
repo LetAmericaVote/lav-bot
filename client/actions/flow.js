@@ -43,8 +43,18 @@ export function addFlow(flow) {
   };
 }
 
-export function updateFlow(id, props) {
-
+export function updateFlow(id, flow) {
+  return (dispatch) => {
+    dispatch({
+      type: FETCH,
+      api: {
+        path: `v1/flow/${id}`,
+        method: 'put',
+        data: flow,
+      },
+    })
+    .then(flow => dispatch({ type: UPDATE_FLOW, id, flow }))
+  };
 }
 
 export function deleteFlow(id) {

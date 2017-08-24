@@ -60,7 +60,7 @@ class TextForm extends React.Component {
 
     return (
       <form className={`text-form -${variant}`} onSubmit={this.onSubmit}>
-        <Error error={error} />
+        { error ? <Error error={error} /> : null }
         { fields.map(field => this.renderField(field)) }
         <Button onSubmit={this.onSubmit} copy={submitCopy} />
       </form>

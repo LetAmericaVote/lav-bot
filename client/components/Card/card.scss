@@ -33,7 +33,7 @@
   &.-expand {
     margin: $spacing 0;
 
-    .card__title {
+    > .card__title {
       border-bottom: 1px solid $light-gray;
 
       h3 {
@@ -41,7 +41,7 @@
       }
     }
 
-    .card__container {
+    > .card__container {
       display: block;
     }
   }

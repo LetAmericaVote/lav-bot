@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { toggleCard } from '../../actions';
 
-const Card = ({ children, title, card, id, toggleCard, deleteItem }) => {
+const Card = ({ children, title, card, id, parent, toggleCard, deleteItem }) => {
   if (! card) return null;
 
   return (
     <div className={`card ${card.expand ? '-expand' : ''}`}>
-      <div className="card__title" onClick={() => toggleCard(id)}>
+      <div className="card__title" onClick={() => toggleCard(id, parent)}>
         <h3>{ title }</h3>
         { deleteItem ? (
           <span className="card__delete" onClick={deleteItem}>&#128465;</span>
@@ -28,6 +28,7 @@ Card.propTypes = {
   children: PropTypes.node,
   title: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  parent: PropTypes.string,
   card: PropTypes.shape({
     expand: PropTypes.bool,
   }),
@@ -45,6 +46,7 @@ Card.defaultProps = {
     expand: false,
   },
   deleteItem: null,
+  parent: null,
 };
 
 export default Card;

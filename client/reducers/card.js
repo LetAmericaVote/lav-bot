@@ -22,6 +22,7 @@ const ensureCard = (cardId, state) => {
 const card = (state = {}, action) => {
   const type = action.type || '';
   const cardId = action.cardId;
+  const parent = action.parent;
   const safeState = ensureCard(cardId, state);
 
   switch(type) {
@@ -35,7 +36,7 @@ const card = (state = {}, action) => {
             ...items,
             [id]: {
               ...card,
-              expand: id === cardId,
+              expand: id === cardId || id === parent,
             },
           };
         }, {}),
