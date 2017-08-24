@@ -6,6 +6,17 @@
     margin-bottom: $spacing * 2;
   }
 
+  &.-inline {
+    .text-form__group {
+      display: inline-block;
+      margin-right: $spacing;
+    }
+
+    button[type="submit"] {
+      display: inline-block;
+    }
+  }
+
   label {
     font-size: $font-small;
     color: $dark-gray;

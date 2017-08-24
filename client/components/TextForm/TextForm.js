@@ -56,10 +56,10 @@ class TextForm extends React.Component {
   }
 
   render() {
-    const { fields, error, submitCopy } = this.props;
+    const { fields, error, submitCopy, variant } = this.props;
 
     return (
-      <form className="text-form" onSubmit={this.onSubmit}>
+      <form className={`text-form -${variant}`} onSubmit={this.onSubmit}>
         <Error error={error} />
         { fields.map(field => this.renderField(field)) }
         <Button onSubmit={this.onSubmit} copy={submitCopy} />
@@ -70,6 +70,7 @@ class TextForm extends React.Component {
 
 TextForm.propTypes = {
   error: PropTypes.string,
+  variant: PropTypes.oneOf(['normal', 'inline']),
   submitCopy: PropTypes.string,
   submit: PropTypes.func.isRequired,
   fields: PropTypes.arrayOf(PropTypes.shape({
@@ -81,6 +82,7 @@ TextForm.propTypes = {
 
 TextForm.defaultProps = {
   error: null,
+  variant: 'normal',
   submitCopy: 'submit',
 };
 

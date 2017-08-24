@@ -27,6 +27,7 @@ const FlowList = ({ flows, addFlow, deleteFlow, retrieveFlows }) => (
           }
         ]}
         submit={addFlow}
+        variant="inline"
       />
     </Card>
     {flows.map(flow => (
