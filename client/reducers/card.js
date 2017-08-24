@@ -3,11 +3,15 @@ import {
 } from '../actions';
 
 const ensureCard = (cardId, state) => {
-  if (! state[cardId]) {
+  if (! cardId || !state) return;
+
+  if (! state.items[cardId]) {
     return {
       ...state,
-      [cardId]: {
-        expand: false,
+      items: {
+        [cardId]: {
+          expand: false,
+        },
       },
     };
   }
@@ -15,30 +19,31 @@ const ensureCard = (cardId, state) => {
   return state;
 };
 
-const auth = (state = {}, action) => {
+const card = (state = {}, action) => {
   const type = action.type || '';
   const cardId = action.cardId;
   const safeState = ensureCard(cardId, state);
 
   switch(type) {
     case EXPAND_CARD:
+      const newState = { ...safeState };
+      for (const id of Object.keys(newState.items)) {
+        newState.items[id].expand = id === cardId ? true : false;
+      }
+
+      return newState;
+    case CLOSE_CARD:
       return {
         ...safeState,
-        [cardId]: {
-          ...safeState[cardId],
-          expand: true,
-        },
+        items: {
+          [cardId]: {
+            ...safeState.items[cardId],
+            expand: false,
+          },
+        }
       };
-    case CLOSE_CARD:
-    return {
-      ...safeState,
-      [cardId]: {
-        ...safeState[cardId],
-        expand: false,
-      },
-    };
     default: return state;
   }
 }
 
-export default auth;
+export default card;

@@ -31,11 +31,13 @@
   }
 
   &.-expand {
+    margin: $spacing 0;
+
     .card__title {
       border-bottom: 1px solid $light-gray;
 
       h3 {
-        font-weight: $font-weight-normal;
+        color: $cyan;
       }
     }
 

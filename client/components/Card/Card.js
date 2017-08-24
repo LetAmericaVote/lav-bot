@@ -2,20 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { toggleCard } from '../../actions';
 
-const Card = ({ children, title, card, id, toggleCard }) => (
-  <div className={`card ${card.expand ? '-expand' : ''}`}>
-    <div className="card__title" onClick={() => toggleCard(id)}>
-      <h3>{ title }</h3>
-      <span className="card__delete">&#128465;</span>
+const Card = ({ children, title, card, id, toggleCard }) => {
+  return (
+    <div className={`card ${card.expand ? '-expand' : ''}`}>
+      <div className="card__title" onClick={() => toggleCard(id)}>
+        <h3>{ title }</h3>
+        <span className="card__delete">&#128465;</span>
+      </div>
+      <div className="card__container">
+        { children }
+      </div>
     </div>
-    <div className="card__container">
-      { children }
-    </div>
-  </div>
-);
+  );
+};
 
 Card.mapStateToProps = (state, props) => ({
-  card: state.card[props.id],
+  card: state.card.items[props.id],
 });
 
 Card.propTypes = {

@@ -9,7 +9,9 @@ export const initialState = {
     key: null,
     error: null,
   },
-  card: {},
+  card: {
+    items: {},
+  },
   flow: {
     pending: false,
     error: null,

@@ -11,7 +11,7 @@ export function closeCard(cardId) {
 
 export function toggleCard(cardId) {
   return (dispatch, getState) => {
-    const card = getState().card[cardId];
+    const card = getState().card.items[cardId];
     if (! card || ! card.expand) {
       return dispatch(expandCard(cardId));
     }

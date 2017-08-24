@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { retrieveFlows } from '../../actions';
+import { retrieveFlows, addFlow } from '../../actions';
+import TextForm from '../TextForm';
 import Card from '../Card';
 
 class FlowListPopulator extends React.Component {
@@ -13,10 +14,21 @@ class FlowListPopulator extends React.Component {
   }
 }
 
-const FlowList = ({ flows, retrieveFlows }) => (
+const FlowList = ({ flows, addFlow, retrieveFlows }) => (
   <article className="flow-list">
     <FlowListPopulator retrieveFlows={retrieveFlows} />
     <h1 className="flow-list__title">Flows</h1>
+    <Card id="add-flow" title="Add flow">
+      <TextForm
+        fields={[
+          {
+            name: 'keyword',
+            type: 'text'
+          }
+        ]}
+        submit={addFlow}
+      />
+    </Card>
     {flows.map(flow => (
       <Card
         key={flow._id}
@@ -34,6 +46,7 @@ FlowList.propTypes = {
     _id: PropTypes.string,
     keyword: PropTypes.string,
   })).isRequired,
+  addFlow: PropTypes.func.isRequired,
   retrieveFlows: PropTypes.func.isRequired,
 };
 
@@ -42,7 +55,7 @@ FlowList.mapStateToProps = state => ({
 });
 
 FlowList.actionCreators = {
-  retrieveFlows,
+  retrieveFlows, addFlow,
 };
 
 export default FlowList;
