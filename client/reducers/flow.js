@@ -1,5 +1,5 @@
 import {
-  RETRIEVE_FLOWS, RECIEVED_FLOWS, RECIEVED_FLOWS_ERROR,
+  RETRIEVE_FLOWS, RECIEVED_FLOWS, RECIEVED_FLOWS_ERROR, DELETE_FLOW,
 } from '../actions';
 
 const flow = (state = {}, action) => {
@@ -22,6 +22,16 @@ const flow = (state = {}, action) => {
         ...state,
         error: action.error,
         pending: false,
+      };
+    case DELETE_FLOW:
+      const deleteIndex = state.items.findIndex(flow => flow._id === action.id);
+
+      return {
+        ...state,
+        items: [
+          ...state.items.slice(0, deleteIndex),
+          ...state.items.slice(deleteIndex + 1)
+        ],
       };
     default: return state;
   }

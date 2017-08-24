@@ -1,4 +1,4 @@
-import { FETCH } from '../actions';
+import { FETCH, deleteCard } from '../actions';
 
 export const RETRIEVE_FLOWS = 'RETRIEVE_FLOWS';
 export const RECIEVED_FLOWS = 'RECIEVED_FLOWS';
@@ -48,5 +48,15 @@ export function updateFlow(id, props) {
 }
 
 export function deleteFlow(id) {
-
+  return (dispatch) => {
+    dispatch({
+      type: FETCH,
+      api: {
+        path: `v1/flow/${id}`,
+        method: 'delete',
+      },
+    })
+    .then(() => dispatch({ type: DELETE_FLOW, id }))
+    .then(() => dispatch(deleteCard(id)));
+  };
 }

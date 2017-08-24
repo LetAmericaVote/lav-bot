@@ -1,5 +1,5 @@
 import {
-  EXPAND_CARD, CLOSE_CARD,
+  EXPAND_CARD, CLOSE_CARD, DELETE_CARD,
 } from '../actions';
 
 const ensureCard = (cardId, state) => {
@@ -32,6 +32,7 @@ const card = (state = {}, action) => {
       }
 
       return newState;
+
     case CLOSE_CARD:
       return {
         ...safeState,
@@ -42,6 +43,13 @@ const card = (state = {}, action) => {
           },
         }
       };
+
+    case DELETE_CARD:
+      const deleteState = { ...state };
+      delete deleteState.items[cardId];
+
+      return deleteState;
+
     default: return state;
   }
 }

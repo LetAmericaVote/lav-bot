@@ -2,12 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { toggleCard } from '../../actions';
 
-const Card = ({ children, title, card, id, toggleCard }) => {
+const Card = ({ children, title, card, id, toggleCard, deleteItem }) => {
+  if (! card) return null;
+  
   return (
     <div className={`card ${card.expand ? '-expand' : ''}`}>
       <div className="card__title" onClick={() => toggleCard(id)}>
         <h3>{ title }</h3>
-        <span className="card__delete">&#128465;</span>
+        { deleteItem ? (
+          <span className="card__delete" onClick={deleteItem}>&#128465;</span>
+        ) : null }
       </div>
       <div className="card__container">
         { children }
@@ -28,6 +32,7 @@ Card.propTypes = {
     expand: PropTypes.bool,
   }),
   toggleCard: PropTypes.func.isRequired,
+  deleteItem: PropTypes.func,
 };
 
 Card.actionCreators = {
@@ -39,6 +44,7 @@ Card.defaultProps = {
   card: {
     expand: false,
   },
+  deleteItem: null,
 };
 
 export default Card;
