@@ -3,8 +3,7 @@ import {
 } from '../actions';
 
 const auth = store => next => action => {
-  next(action);
-  if (action.type !== LOGIN) return;
+  if (action.type !== LOGIN) return next(action);
 
   store.dispatch(loginPending());
 

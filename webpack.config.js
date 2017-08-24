@@ -30,9 +30,10 @@ const plugins = [
 ];
 
 module.exports = {
-  entry: {
-    main: './client/index.js',
-  },
+  entry: [
+    'whatwg-fetch',
+    './client/index.js'
+  ],
   output: {
     filename: './dist/main.js',
   },

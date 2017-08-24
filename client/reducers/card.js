@@ -16,7 +16,8 @@ const ensureCard = (cardId, state) => {
 };
 
 const auth = (state = {}, action) => {
-  const { type, cardId } = action;
+  const type = action.type || '';
+  const cardId = action.cardId;
   const safeState = ensureCard(cardId, state);
 
   switch(type) {

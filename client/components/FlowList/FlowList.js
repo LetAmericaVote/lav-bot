@@ -1,10 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { login } from '../../actions';
+import { retrieveFlows } from '../../actions';
 import Card from '../Card';
 
-const FlowList = ({ flows }) => (
+class FlowListPopulator extends React.Component {
+  componentDidMount() {
+    this.props.retrieveFlows();
+  }
+
+  render() {
+    return null;
+  }
+}
+
+const FlowList = ({ flows, retrieveFlows }) => (
   <article className="flow-list">
+    <FlowListPopulator retrieveFlows={retrieveFlows} />
     <h1 className="flow-list__title">Flows</h1>
     {flows.map(flow => (
       <Card
@@ -23,19 +34,15 @@ FlowList.propTypes = {
     _id: PropTypes.string,
     keyword: PropTypes.string,
   })).isRequired,
-};
-
-FlowList.defaultProps = {
-  flows: [],
+  retrieveFlows: PropTypes.func.isRequired,
 };
 
 FlowList.mapStateToProps = state => ({
-  // pending: state.login.pending,
-  // error: state.login.error,
+  flows: state.flow.items,
 });
 
 FlowList.actionCreators = {
-  // login,
+  retrieveFlows,
 };
 
 export default FlowList;
