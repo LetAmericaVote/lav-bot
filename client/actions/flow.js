@@ -1,72 +1,25 @@
-import { FETCH, deleteCard } from '../actions';
+import {
+  retrieveObjects, createObject, pushObjectUpdate,
+  deleteRemoteObject, deleteCard,
+} from '../actions';
 
-export const RETRIEVE_FLOWS = 'RETRIEVE_FLOWS';
-export const RECIEVED_FLOWS = 'RECIEVED_FLOWS';
-export const RECIEVED_FLOWS_ERROR = 'RECIEVED_FLOWS_ERROR';
-
-export const ADD_FLOW = 'ADD_FLOW';
-export const UPDATE_FLOW = 'UPDATE_FLOW';
-export const DELETE_FLOW = 'DELETE_FLOW';
-
-export function recievedFlows(flows) {
-  return { type: RECIEVED_FLOWS, flows };
-}
-
-export function recievedFlowsError(error) {
-  return { type: RECIEVED_FLOWS_ERROR, error };
-}
+export const FLOW_OBJECT_TYPE = 'flow';
 
 export function retrieveFlows() {
-  return (dispatch) => {
-    dispatch({
-      type: FETCH,
-      api: {
-        path: 'v1/flow',
-        method: 'get',
-      },
-    })
-    .then(flows => dispatch(recievedFlows(flows)));
-  };
+  return dispatch => dispatch(retrieveObjects(FLOW_OBJECT_TYPE));
 }
 
 export function addFlow(flow) {
-  return (dispatch) => {
-    dispatch({
-      type: FETCH,
-      api: {
-        path: 'v1/flow',
-        method: 'post',
-        data: flow,
-      },
-    })
-    .then(flow => dispatch(recievedFlows([flow])));
-  };
+  return dispatch => dispatch(createObject(FLOW_OBJECT_TYPE, flow));
 }
 
-export function updateFlow(id, flow) {
-  return (dispatch) => {
-    dispatch({
-      type: FETCH,
-      api: {
-        path: `v1/flow/${id}`,
-        method: 'put',
-        data: flow,
-      },
-    })
-    .then(flow => dispatch({ type: UPDATE_FLOW, id, flow }))
-  };
+export function updateFlow(flow) {
+  return dispatch => dispatch(pushObjectUpdate(FLOW_OBJECT_TYPE, flow));
 }
 
 export function deleteFlow(id) {
   return (dispatch) => {
-    dispatch({
-      type: FETCH,
-      api: {
-        path: `v1/flow/${id}`,
-        method: 'delete',
-      },
-    })
-    .then(() => dispatch({ type: DELETE_FLOW, id }))
-    .then(() => dispatch(deleteCard(id)));
+    dispatch(deleteCard(id));
+    dispatch(deleteRemoteObject(FLOW_OBJECT_TYPE, id));
   };
 }

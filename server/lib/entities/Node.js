@@ -1,4 +1,5 @@
 const Entity = require('./Entity');
+const FindByFlowPlugin = require('../plugins/FindByFlow');
 
 class Node extends Entity {
   getCollection() {
@@ -18,7 +19,7 @@ class Node extends Entity {
   }
 
   getPluginAddons() {
-    return [];
+    return [new FindByFlowPlugin()];
   }
 }
 

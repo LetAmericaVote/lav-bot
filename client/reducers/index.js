@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 import login from './login';
-import card from './card';
 import flow from './flow';
+import node from './node';
+import path from './path';
+import objects from './objects';
 
 export const initialState = {
   login: {
@@ -9,18 +11,27 @@ export const initialState = {
     key: null,
     error: null,
   },
-  card: {
-    items: {},
-  },
   flow: {
     pending: false,
     error: null,
     items: [],
   },
+  node: {
+    items: [],
+  },
+  path: {
+    items: [],
+  },
+  objects: {
+    card: [],
+    flow: [],
+    path: [],
+    node: [],
+  },
 };
 
 const rootReducer = combineReducers({
-  login, card, flow,
+  login, flow, node, path, objects,
 });
 
 export default rootReducer;

@@ -1,7 +1,7 @@
-import { FETCH } from '../actions';
+import { USE_API } from '../actions';
 
 const api = store => next => action => {
-  if (action.type !== FETCH) return next(action);
+  if (action.type !== USE_API) return next(action);
 
   const { api } = action;
   const key = store.getState().login.key;

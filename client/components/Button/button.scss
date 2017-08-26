@@ -23,4 +23,16 @@
   &:active {
     background-color: darken($cyan, 15%);
   }
+
+  &.tertiary {
+    background: none;
+    color: $dark-gray;
+    box-shadow: none;
+    text-decoration: underline;
+    text-transform: none;
+
+    &:hover {
+      color: $black;
+    }
+  }
 }

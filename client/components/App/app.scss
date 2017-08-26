@@ -2,7 +2,7 @@
 
 .app {
   .app__container {
-    width: 960px;
+    max-width: 960px;
     margin: auto;
     padding: $spacing;
     box-sizing: border-box;

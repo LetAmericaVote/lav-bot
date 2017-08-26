@@ -1,23 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Populator from './Populator';
 import TextForm from '../TextForm';
 import Card from '../Card';
 import Flow from '../Flow';
-import { retrieveFlows, addFlow } from '../../actions';
-
-class FlowListPopulator extends React.Component {
-  componentDidMount() {
-    this.props.retrieveFlows();
-  }
-
-  render() {
-    return null;
-  }
-}
+import { FLOW_OBJECT_TYPE, retrieveFlows, addFlow } from '../../actions';
 
 const FlowList = ({ flows, addFlow, deleteFlow, retrieveFlows }) => (
   <article className="flow-list">
-    <FlowListPopulator retrieveFlows={retrieveFlows} />
+    <Populator retrieveFlows={retrieveFlows} />
     <h1 className="flow-list__title">Flows</h1>
     <Card id="add-flow" title="Add flow">
       <TextForm
@@ -47,7 +38,7 @@ FlowList.propTypes = {
 };
 
 FlowList.mapStateToProps = state => ({
-  flows: state.flow.items,
+  flows: state.objects[FLOW_OBJECT_TYPE],
 });
 
 FlowList.actionCreators = {

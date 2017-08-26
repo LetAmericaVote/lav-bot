@@ -45,5 +45,15 @@
     width: 100%;
     min-height: 4em;
     font-size: 1rem;
+    font-family: $font-family;
+    color: $black;
+    border: 1px solid $dark-cyan;
+    outline: none;
+    padding: $half-spacing;
+    box-sizing: border-box;
+
+    &:focus {
+      border: 1px solid $cyan;
+    }
   }
 }

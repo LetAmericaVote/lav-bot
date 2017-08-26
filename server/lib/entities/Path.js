@@ -1,5 +1,6 @@
 const Entity = require('./Entity');
 const FindByNodeAndKeyword = require('../plugins/FindByNodeAndKeyword');
+const FindByFromNode = require('../plugins/FindByFromNode');
 
 class Path extends Entity {
   getCollection() {
@@ -23,7 +24,7 @@ class Path extends Entity {
   }
 
   getPluginAddons() {
-    return [new FindByNodeAndKeyword()];
+    return [new FindByNodeAndKeyword(), new FindByFromNode()];
   }
 }
 

@@ -1,20 +1,39 @@
-export const EXPAND_CARD = 'EXPAND_CARD';
-export const CLOSE_CARD = 'CLOSE_CARD';
-export const DELETE_CARD = 'DELETE_CARD';
+import { addObject, updateObject, deleteObject } from '../actions';
+
+export const CARD_OBJECT_TYPE = 'card';
+
+export function addCard(cardId) {
+  return addObject(CARD_OBJECT_TYPE, {
+    _id: cardId,
+    isExpanded: false,
+  });
+}
 
 export function expandCard(cardId) {
-  return { type: EXPAND_CARD, cardId };
+  return updateObject(CARD_OBJECT_TYPE, {
+    _id: cardId,
+    isExpanded: true,
+  });
 }
 
 export function closeCard(cardId) {
-  return { type: CLOSE_CARD, cardId };
-}
+  return updateObject(CARD_OBJECT_TYPE, {
+    _id: cardId,
+    isExpanded: false,
+  });}
 
 export function toggleCard(cardId) {
   return (dispatch, getState) => {
-    const card = getState().card.items[cardId];
+    const card = getState().objects[CARD_OBJECT_TYPE].find(card => (
+      card._id === cardId
+    ));
 
-    if (! card || ! card.expand) {
+    if (! card) {
+      dispatch(addCard(cardId));
+      return dispatch(expandCard(cardId));
+    }
+
+    if (! card.isExpanded) {
       return dispatch(expandCard(cardId));
     }
 
@@ -23,5 +42,5 @@ export function toggleCard(cardId) {
 }
 
 export function deleteCard(cardId) {
-  return { type: DELETE_CARD, cardId };
+  return deleteObject(CARD_OBJECT_TYPE, cardId);
 }

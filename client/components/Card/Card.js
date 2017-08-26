@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { toggleCard } from '../../actions';
+import { CARD_OBJECT_TYPE, toggleCard } from '../../actions';
 
-const Card = ({ children, title, card, id, parent, toggleCard, deleteItem }) => {
+const Card = ({ children, title, card, id, className, toggleCard, deleteItem }) => {
   if (! card) return null;
 
   return (
-    <div className={`card ${card.expand ? '-expand' : ''}`}>
-      <div className="card__title" onClick={() => toggleCard(id, parent)}>
+    <div className={`card ${card.isExpanded ? '-expand' : ''} ${className}`}>
+      <div className="card__title" onClick={() => toggleCard(id)}>
         <h3>{ title }</h3>
         { deleteItem ? (
           <span className="card__delete" onClick={deleteItem}>&#128465;</span>
@@ -21,16 +21,17 @@ const Card = ({ children, title, card, id, parent, toggleCard, deleteItem }) => 
 };
 
 Card.mapStateToProps = (state, props) => ({
-  card: state.card.items[props.id],
+  card: state.objects[CARD_OBJECT_TYPE].find(card => card._id === props.id),
 });
 
 Card.propTypes = {
   children: PropTypes.node,
   title: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  parent: PropTypes.string,
+  className: PropTypes.string,
   card: PropTypes.shape({
-    expand: PropTypes.bool,
+    _id: PropTypes.string,
+    isExpanded: PropTypes.bool,
   }),
   toggleCard: PropTypes.func.isRequired,
   deleteItem: PropTypes.func,
@@ -43,10 +44,11 @@ Card.actionCreators = {
 Card.defaultProps = {
   children: null,
   card: {
-    expand: false,
+    _id: '',
+    isExpanded: false,
   },
   deleteItem: null,
-  parent: null,
+  className: '',
 };
 
 export default Card;
