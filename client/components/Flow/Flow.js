@@ -40,7 +40,7 @@ const Flow = ({ id, flow, nodes, updateFlow, deleteFlow, addNode, getFlowNodes }
         ]}
         submit={node => {
           node.flowId = id;
-          addNode(node)
+          addNode(node);
         }}
       />
     </Card>

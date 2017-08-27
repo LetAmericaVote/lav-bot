@@ -1,3 +1,4 @@
+
 const ERROR_MSG = 'Looks like we had an error. Mind trying again?';
 const INCORRECT_KEYWORD_MSG = 'Looks like you might have mistyped the keyword. Try again?';
 
@@ -58,6 +59,7 @@ async function handleMessage(socialId, rawMessage) {
   }
 
   const path = await getPath(user.position.toString(), message);
+
   if (! path || ! path.to) return ERROR_MSG;
 
   const node = await loadNode(path.to.toString());

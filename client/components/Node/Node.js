@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import TextForm from '../TextForm';
 import Card from '../Card';
 import Button from '../Button';
+import PathList from '../PathList';
 import {
   FLOW_OBJECT_TYPE, NODE_OBJECT_TYPE,
   updateNode, deleteNode, updateFlow
@@ -36,6 +37,7 @@ const Node = ({ id, node, flow, updateNode, deleteNode, updateFlow }) => (
         onSubmit={() => updateFlow({ _id: node.flowId, start: id })}
       />
     ) : null}
+    <PathList nodeId={id} />
   </Card>
 );
 

@@ -42,6 +42,7 @@ class TextForm extends React.Component {
     }
 
     const props = {
+      className: "base-text-input",
       onChange: this.onInput,
       value: this.state[name],
       name,

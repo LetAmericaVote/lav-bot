@@ -17,8 +17,8 @@ export function updateObject(objectType, object) {
   return { type: UPDATE_OBJECT, objectType, object };
 }
 
-export function deleteObject(objectType, object) {
-  return { type: DELETE_OBJECT, objectType, object };
+export function deleteObject(objectType, objectId) {
+  return { type: DELETE_OBJECT, objectType, objectId };
 }
 
 export function createObject(objectType, data) {
@@ -70,5 +70,5 @@ export function deleteRemoteObject(objectType, objectId) {
       method: 'delete',
     }))
   )
-  .then(() => deleteObject(objectType, objectId));
+  .then(() => dispatch(deleteObject(objectType, objectId)));
 }

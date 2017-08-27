@@ -5,10 +5,16 @@ import { CARD_OBJECT_TYPE, toggleCard } from '../../actions';
 const Card = ({ children, title, card, id, className, toggleCard, deleteItem }) => {
   if (! card) return null;
 
+  const onTitleClick = (event) => {
+    if (event.target.classList.contains('jsx-expand-trigger')) {
+      toggleCard(id);
+    }
+  };
+
   return (
     <div className={`card ${card.isExpanded ? '-expand' : ''} ${className}`}>
-      <div className="card__title" onClick={() => toggleCard(id)}>
-        <h3>{ title }</h3>
+      <div className="card__title jsx-expand-trigger" onClick={onTitleClick}>
+        <h3 className="jsx-expand-trigger">{ title }</h3>
         { deleteItem ? (
           <span className="card__delete" onClick={deleteItem}>&#128465;</span>
         ) : null }

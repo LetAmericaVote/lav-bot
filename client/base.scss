@@ -11,3 +11,21 @@ html, body {
 h1, h2, h3, p {
   margin: 0;
 }
+
+.base-text-input {
+  font-size: $font-regular;
+  font-family: $font-family;
+  color: $black;
+  border: none;
+  border-bottom: $border-stable;
+  outline: none;
+
+  &::placeholder {
+    color: $light-gray;
+    font-size: $font-regular;
+  }
+
+  &:focus {
+    border-bottom: $border-focus;
+  }
+}

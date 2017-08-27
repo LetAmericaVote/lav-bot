@@ -22,19 +22,6 @@
     display: block;
   }
 
-  input {
-    font-size: $font-regular;
-    font-family: $font-family;
-    color: $black;
-    border: none;
-    border-bottom: 1px solid $dark-cyan;
-    outline: none;
-
-    &:focus {
-      border-bottom: 1px solid $cyan;
-    }
-  }
-
   input[type="text"], input[type="password"], input[type="search"] {
     width: 100%;
     box-sizing: border-box;

@@ -3,24 +3,19 @@ import { addObject, updateObject, deleteObject } from '../actions';
 export const CARD_OBJECT_TYPE = 'card';
 
 export function addCard(cardId) {
-  return addObject(CARD_OBJECT_TYPE, {
-    _id: cardId,
-    isExpanded: false,
-  });
+  const card = { _id: cardId, isExpanded: false };
+  return dispatch => dispatch(addObject(CARD_OBJECT_TYPE, card));
 }
 
 export function expandCard(cardId) {
-  return updateObject(CARD_OBJECT_TYPE, {
-    _id: cardId,
-    isExpanded: true,
-  });
+  const card = { _id: cardId, isExpanded: true };
+  return dispatch => dispatch(updateObject(CARD_OBJECT_TYPE, card));
 }
 
 export function closeCard(cardId) {
-  return updateObject(CARD_OBJECT_TYPE, {
-    _id: cardId,
-    isExpanded: false,
-  });}
+  const card = { _id: cardId, isExpanded: false };
+  return dispatch => dispatch(updateObject(CARD_OBJECT_TYPE, card));
+}
 
 export function toggleCard(cardId) {
   return (dispatch, getState) => {
@@ -42,5 +37,5 @@ export function toggleCard(cardId) {
 }
 
 export function deleteCard(cardId) {
-  return deleteObject(CARD_OBJECT_TYPE, cardId);
+  return dispatch => dispatch(deleteObject(CARD_OBJECT_TYPE, cardId));
 }

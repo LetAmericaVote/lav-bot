@@ -16,7 +16,7 @@ class FindByFromNodePlugin extends Plugin {
 
   executor(nodeId) {
     return this.model
-      .find({ nodeId })
+      .find({ from: nodeId })
       .catch(this.errorHandler);
   }
 

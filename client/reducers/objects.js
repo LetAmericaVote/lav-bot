@@ -34,7 +34,7 @@ function addObject(state, action) {
 function addManyObjects(state, action) {
   const { objectType, objects } = action;
 
-  const nonDuplicateObjects = objects.filter(obj => ! (
+  const nonDuplicateObjects = (objects || []).filter(obj => ! (
     state[objectType].find(compare => compare._id === obj._id)
   ));
 

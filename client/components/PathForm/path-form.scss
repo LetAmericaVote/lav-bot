@@ -1,0 +1,28 @@
+@import '../../toolbox.scss';
+
+.path-form {
+  margin: $half-spacing 0;
+  
+  select {
+    font-size: $font-small;
+    font-family: $font-family;
+    outline: none;
+    border: $border-stable;
+    background: $white;
+    margin-left: $spacing;
+
+    &:focus {
+      border: $border-focus;
+    }
+
+    .value {
+      color: red;
+    }
+  }
+
+  .button {
+    display: inline-block;
+    padding: 0;
+    margin-left: $spacing;
+  }
+}

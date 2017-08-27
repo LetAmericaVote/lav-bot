@@ -24,7 +24,7 @@ class Path extends Entity {
   }
 
   getPluginAddons() {
-    return [new FindByNodeAndKeyword(), new FindByFromNode()];
+    return [new FindByFromNode(), new FindByNodeAndKeyword()];
   }
 }
 

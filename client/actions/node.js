@@ -6,7 +6,7 @@ import {
 export const NODE_OBJECT_TYPE = 'node';
 
 export function addNode(node) {
-  return (dispatch) => createObject(NODE_OBJECT_TYPE, node);
+  return (dispatch) => dispatch(createObject(NODE_OBJECT_TYPE, node));
 }
 
 export function getFlowNodes(flowId) {

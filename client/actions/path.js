@@ -1,35 +1,29 @@
-import { FETCH } from '../actions';
+import {
+  useApi, addObjects, createObject,
+  pushObjectUpdate, deleteRemoteObject,
+} from '../actions';
 
-export const ADD_PATHS = 'ADD_PATHS';
-export const UPDATE_PATH = 'UPDATE_PATH';
-
-export function addPaths(paths) {
-  return { type: ADD_NODE_PATHS, paths };
-}
+export const PATH_OBJECT_TYPE = 'path';
 
 export function getNodePaths(nodeId) {
   return (dispatch) => (
-    dispatch({
-      type: FETCH,
-      api: {
-        path: `v1/path/from/${nodeId}`,
-        method: 'get',
-      },
-    })
-    .then(paths => dispatch(addPaths(paths)))
+    dispatch(useApi({
+      path: `v1/path/from/${nodeId}`,
+      method: 'get',
+    }))
+    .then(paths => dispatch(addObjects(PATH_OBJECT_TYPE, paths)))
   );
 }
 
-export function updatePath(id, path) {
-  return (dispatch) => {
-    dispatch({
-      type: FETCH,
-      api: {
-        path: `v1/path/${id}`,
-        method: 'put',
-        data: path,
-      },
-    })
-    .then(node => dispatch({ type: UPDATE_PATH, id, path }))
-  };
+export function addPath(path) {
+  return dispatch => dispatch(createObject(PATH_OBJECT_TYPE, path));
+}
+
+export function updatePath(path) {
+  console.log(path);
+  return dispatch => dispatch(pushObjectUpdate(PATH_OBJECT_TYPE, path));
+}
+
+export function deletePath(id) {
+  return dispatch => dispatch(deleteRemoteObject(PATH_OBJECT_TYPE, id));
 }
