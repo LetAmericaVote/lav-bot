@@ -20,7 +20,6 @@ export function addPath(path) {
 }
 
 export function updatePath(path) {
-  console.log(path);
   return dispatch => dispatch(pushObjectUpdate(PATH_OBJECT_TYPE, path));
 }
 
