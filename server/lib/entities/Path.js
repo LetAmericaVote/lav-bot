@@ -26,6 +26,12 @@ class Path extends Entity {
   getPluginAddons() {
     return [new FindByFromNode(), new FindByNodeAndKeyword()];
   }
+
+  getRules() {
+    return {
+      keyword: 'lowercase',
+    };
+  }
 }
 
 module.exports = Path;

@@ -26,7 +26,10 @@ const Flow = ({ id, flow, nodes, updateFlow, deleteFlow, addNode, getFlowNodes }
           value: flow.keyword,
         }
       ]}
-      submit={state => updateFlow(id, state)}
+      submit={state => {
+        state._id = id;
+        updateFlow(state);
+      }}
       variant="inline"
     />
     <h2 className="flow__subtitle">Nodes</h2>

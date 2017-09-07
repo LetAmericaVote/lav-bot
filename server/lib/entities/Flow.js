@@ -22,6 +22,12 @@ class Flow extends Entity {
   getPluginAddons() {
     return [new FindAllPlugin(), new FindByKeywordPlugin()];
   }
+
+  getRules() {
+    return {
+      keyword: 'lowercase',
+    };
+  }
 }
 
 module.exports = Flow;

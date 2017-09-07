@@ -65,12 +65,23 @@ class Entity {
   fillInput(input, obj) {
     const filled = {};
 
+    const enforceRules = (key, value) => {
+      const rule = this.getRules()[key];
+      if (! rule) return value;
+
+      if (rule === 'lowercase') {
+        return value.toLowerCase();
+      }
+
+      return value;
+    };
+
     for (const key of Object.keys(obj)) {
-      filled[key] = obj[key];
+      filled[key] = enforceRules(key, obj[key]);
     }
 
     for (const key of Object.keys(input)) {
-      filled[key] = input[key];
+      filled[key] = enforceRules(key, input[key]);
     }
 
     return filled;
@@ -90,6 +101,10 @@ class Entity {
 
   getCollection() {
     return '';
+  }
+
+  getRules() {
+    return { /* ... */ };
   }
 }
 
