@@ -33,6 +33,10 @@ function executeCore(platform, socialId, text) {
   return new Promise((resolve, reject) => resolve(
     core(`${platform}_${socialId}`, text)
   )).then(msg => {
+    if (! msg) {
+      return;
+    }
+
     switch (platform) {
       case 'fb': sendFacebookMessage(socialId, msg); break;
       default: console.log(msg);

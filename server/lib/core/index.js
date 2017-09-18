@@ -1,6 +1,9 @@
+const CHAT_KEYWORD = 'chat';
 
-const ERROR_MSG = 'Looks like we had an error. Mind trying again?';
-const INCORRECT_KEYWORD_MSG = 'Looks like you might have mistyped the keyword. Try again?';
+const ERROR_MSG = 'Looks like our Facebook bot had an error. Mind trying again? If you want to chat with a human, reply "CHAT".';
+const INCORRECT_KEYWORD_MSG = 'Looks like you might have mistyped the keyword, can you try again? If you want to chat with a human, reply "CHAT".';
+const CHAT_WITH_BOT = 'You\'re now chatting with our Facebook bot.';
+const STOP_CHATTING_WITH_BOT = 'You\'re not longer chatting with our Facebook bot. Reply with "CHAT" at anytime if you want to go back and talk with our bot!';
 
 const Flow = new (require('../entities/Flow'));
 const User = new (require('../entities/User'));
@@ -37,10 +40,22 @@ async function getPath(nodeId, keyword) {
   return Path.findByNodeAndKeyword(nodeId, keyword).catch(onPromiseError);
 }
 
+async function toggleUserIgnoreBot(userId, ignoreBot) {
+  return User.toggleUserIgnoreBot(userId, ignoreBot).catch(onPromiseError);
+}
+
 async function handleMessage(socialId, rawMessage) {
   const message = (rawMessage || '').toLowerCase();
 
   const user = await getUser(socialId);
+
+  if (message === CHAT_KEYWORD) {
+    await toggleUserIgnoreBot(user._id, ! user.ignoreBot);
+    return user.ignoreBot ? CHAT_WITH_BOT : STOP_CHATTING_WITH_BOT;
+  } else if (user.ignoreBot) {
+    return false;
+  }
+
   const flowEntrance = await getFlowEntrance(message);
 
   if (flowEntrance) {
