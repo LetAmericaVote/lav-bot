@@ -3,21 +3,24 @@ import PropTypes from 'prop-types';
 import TextForm from '../TextForm';
 import Card from '../Card';
 import Button from '../Button';
-import PathList from '../PathList';
 import {
-  FLOW_OBJECT_TYPE, NODE_OBJECT_TYPE,
-  updateNode, deleteNode, updateFlow
+  NODE_OBJECT_TYPE, updateNode, deleteNode
 } from '../../actions';
 
-const Node = ({ id, node, flow, updateNode, deleteNode, updateFlow }) => (
+const Node = ({ id, node, updateNode, deleteNode }) => (
   <Card
-    title={`${node.message.slice(0, 20)}...`}
+    title={node.keyword}
     id={id}
     className="node"
     deleteItem={() => deleteNode(id)}
   >
     <TextForm
       fields={[
+        {
+          name: 'keyword',
+          type: 'text',
+          value: node.keyword,
+        },
         {
           name: 'message',
           type: 'textarea',
@@ -29,50 +32,31 @@ const Node = ({ id, node, flow, updateNode, deleteNode, updateFlow }) => (
         updateNode(state)
       }}
     />
-    { ! flow.start || flow.start !== id ? (
-      <Button
-        copy="Set this as the first message in flow"
-        variant="tertiary"
-        type="button"
-        onSubmit={() => updateFlow({ _id: node.flowId, start: id })}
-      />
-    ) : null}
-    <PathList nodeId={id} />
   </Card>
 );
 
 Node.propTypes = {
   id: PropTypes.string.isRequired,
   node: PropTypes.shape({
-    flowId: PropTypes.string,
     message: PropTypes.string,
-  }),
-  flow: PropTypes.shape({
-    _id: PropTypes.string,
-    start: PropTypes.string,
+    keyword: PropTypes.string,
   }),
   updateNode: PropTypes.func.isRequired,
   deleteNode: PropTypes.func.isRequired,
-  updateFlow: PropTypes.func.isRequired,
 };
 
 Node.mapStateToProps = (state, ownProps) => ({
   node: state.objects[NODE_OBJECT_TYPE].find(node => node._id === ownProps.id),
-  flow: state.objects[FLOW_OBJECT_TYPE].find(flow => flow._id === ownProps.flowId),
 });
 
 Node.actionCreators = {
-  updateNode, deleteNode, updateFlow,
+  updateNode, deleteNode,
 };
 
 Node.defaultProps = {
   node: {
-    flowId: '',
+    keyword: '',
     message: '',
-  },
-  flow: {
-    _id: '',
-    start: null,
   },
 };
 

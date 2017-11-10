@@ -5,10 +5,8 @@ const INCORRECT_KEYWORD_MSG = 'Looks like you might have mistyped the keyword, c
 const CHAT_WITH_BOT = 'You\'re now chatting with our Facebook bot.';
 const STOP_CHATTING_WITH_BOT = 'You\'re not longer chatting with our Facebook bot. Reply with "CHAT" at anytime if you want to go back and talk with our bot!';
 
-const Flow = new (require('../entities/Flow'));
 const User = new (require('../entities/User'));
 const Node = new (require('../entities/Node'));
-const Path = new (require('../entities/Path'));
 
 function onPromiseError(err) {
   console.error(err);
@@ -24,20 +22,12 @@ async function getUser(socialId) {
     .catch(onPromiseError);
 }
 
-async function getFlowEntrance(message) {
-  return Flow.findByKeyword(message).catch(onPromiseError);
-}
-
-async function loadNode(nodeId) {
-  return Node.findOne(nodeId).catch(onPromiseError);
-}
-
 async function updateUserPosition(userId, nodeId) {
   return User.updateUserPosition(userId, nodeId).catch(onPromiseError);
 }
 
-async function getPath(nodeId, keyword) {
-  return Path.findByNodeAndKeyword(nodeId, keyword).catch(onPromiseError);
+async function getNodeByKeyword(keyword) {
+  return Node.findByKeyword(keyword).catch(onPromiseError);
 }
 
 async function toggleUserIgnoreBot(userId, ignoreBot) {
@@ -56,29 +46,11 @@ async function handleMessage(socialId, rawMessage) {
     return false;
   }
 
-  const flowEntrance = await getFlowEntrance(message);
+  const node = await getNodeByKeyword(message);
 
-  if (flowEntrance) {
-    if (! flowEntrance.start) return ERROR_MSG;
-
-    const node = await loadNode(flowEntrance.start);
-    if (! node) return ERROR_MSG;
-
-    await updateUserPosition(user._id, node._id);
-
-    return node.message || ERROR_MSG;
-  }
-
-  if (! user.position) {
+  if (! node) {
     return INCORRECT_KEYWORD_MSG;
   }
-
-  const path = await getPath(user.position.toString(), message);
-
-  if (! path || ! path.to) return ERROR_MSG;
-
-  const node = await loadNode(path.to.toString());
-  if (! node) return ERROR_MSG;
 
   await updateUserPosition(user._id, node._id);
 

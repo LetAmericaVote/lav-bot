@@ -1,5 +1,6 @@
 const Entity = require('./Entity');
-const FindByFlowPlugin = require('../plugins/FindByFlow');
+const FindByKeywordPlugin = require('../plugins/FindByKeyword');
+const FindAllPlugin = require('../plugins/FindAll');
 
 class Node extends Entity {
   getCollection() {
@@ -8,9 +9,10 @@ class Node extends Entity {
 
   getSchema() {
     return {
-      flowId: {
+      keyword: {
         index: true,
         editable: true,
+        unique: true,
       },
       message: {
         editable: true,
@@ -19,7 +21,13 @@ class Node extends Entity {
   }
 
   getPluginAddons() {
-    return [new FindByFlowPlugin()];
+    return [new FindByKeywordPlugin(), new FindAllPlugin()];
+  }
+
+  getRules() {
+    return {
+      keyword: 'lowercase',
+    };
   }
 }
 

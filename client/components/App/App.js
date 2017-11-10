@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Nav from '../Nav';
 import Login from '../Login';
-import FlowList from '../FlowList';
+import NodeList from '../NodeList';
 
 const App = ({ hasKey }) => (
   <main className="app">
     <Nav />
     <div className="app__container">
-      { hasKey ? <FlowList /> : <Login /> }
+      { hasKey ? <NodeList /> : <Login /> }
     </div>
   </main>
 );
