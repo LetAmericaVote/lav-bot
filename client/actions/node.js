@@ -1,22 +1,16 @@
 import {
-  useApi, addObjects, createObject,
+  useApi, addObjects, createObject, retrieveObjects,
   pushObjectUpdate, deleteRemoteObject, deleteCard,
 } from '../actions';
 
 export const NODE_OBJECT_TYPE = 'node';
 
-export function addNode(node) {
-  return (dispatch) => dispatch(createObject(NODE_OBJECT_TYPE, node));
+export function retrieveNodes() {
+  return dispatch => dispatch(retrieveObjects(NODE_OBJECT_TYPE));
 }
 
-export function getFlowNodes(flowId) {
-  return (dispatch) => {
-    dispatch(useApi({
-      path: `v1/node/flow/${flowId}`,
-      method: 'get',
-    }))
-    .then(nodes => dispatch(addObjects(NODE_OBJECT_TYPE, nodes)));
-  };
+export function addNode(node) {
+  return (dispatch) => dispatch(createObject(NODE_OBJECT_TYPE, node));
 }
 
 export function updateNode(node) {

@@ -31,7 +31,8 @@ class Entity {
   _setupIndexes() {
     for (const key of Object.keys(this.getSchema())) {
       if (this.getSchema()[key].index === true) {
-        this.model.createIndex(key).catch(this.errorHandler);
+        const options = this.getSchema()[key].unique ? { unique: true } : {};
+        this.model.createIndex(key, options).catch(this.errorHandler);
       }
     }
   }
