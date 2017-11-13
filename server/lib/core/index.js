@@ -3,7 +3,12 @@ const CHAT_KEYWORD = 'chat';
 const ERROR_MSG = 'Looks like our Facebook bot had an error. Mind trying again? If you want to chat with a human, reply "CHAT".';
 const INCORRECT_KEYWORD_MSG = 'Looks like you might have mistyped the keyword, can you try again? If you want to chat with a human, reply "CHAT".';
 const CHAT_WITH_BOT = 'You\'re now chatting with our Facebook bot.';
+<<<<<<< Updated upstream
 const STOP_CHATTING_WITH_BOT = 'You\'re not longer chatting with our Facebook bot. Reply with "CHAT" at anytime if you want to go back and talk with our bot!';
+=======
+const STOP_CHATTING_WITH_BOT = 'You\'re not longer chatting with our Facebook bot. Reply with "CHAT" at any time if you want to go back and talk with our bot!';
+const FIRST_MESSAGE = 'Reply "JOIN" to get started using the Let America Vote Facebook bot or reply "CHAT" to talk with a human.';
+>>>>>>> Stashed changes
 
 const Flow = new (require('../entities/Flow'));
 const User = new (require('../entities/User'));
