@@ -10,8 +10,6 @@ export const initialState = {
   },
   objects: {
     card: [],
-    flow: [],
-    path: [],
     node: [],
   },
 };

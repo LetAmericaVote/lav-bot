@@ -3,13 +3,15 @@ const CHAT_KEYWORD = 'chat';
 const ERROR_MSG = 'Looks like our Facebook bot had an error. Mind trying again? If you want to chat with a human, reply "CHAT".';
 const INCORRECT_KEYWORD_MSG = 'Looks like you might have mistyped the keyword, can you try again? If you want to chat with a human, reply "CHAT".';
 const CHAT_WITH_BOT = 'You\'re now chatting with our Facebook bot.';
+<<<<<<< HEAD
 const STOP_CHATTING_WITH_BOT = 'You\'re not longer chatting with our Facebook bot. Reply with "CHAT" at any time if you want to go back and talk with our bot!';
+=======
+const STOP_CHATTING_WITH_BOT = 'You\'re not longer chatting with our Facebook bot. Reply with "CHAT" at anytime if you want to go back and talk with our bot!';
+>>>>>>> 91e6f328e6431649a0b842d729a6ad6c578b192d
 const FIRST_MESSAGE = 'Reply "JOIN" to get started using the Let America Vote Facebook bot or reply "CHAT" to talk with a human.';
 
-const Flow = new (require('../entities/Flow'));
 const User = new (require('../entities/User'));
 const Node = new (require('../entities/Node'));
-const Path = new (require('../entities/Path'));
 
 function onPromiseError(err) {
   console.error(err);
@@ -25,20 +27,12 @@ async function getUser(socialId) {
     .catch(onPromiseError);
 }
 
-async function getFlowEntrance(message) {
-  return Flow.findByKeyword(message).catch(onPromiseError);
-}
-
-async function loadNode(nodeId) {
-  return Node.findOne(nodeId).catch(onPromiseError);
-}
-
 async function updateUserPosition(userId, nodeId) {
   return User.updateUserPosition(userId, nodeId).catch(onPromiseError);
 }
 
-async function getPath(nodeId, keyword) {
-  return Path.findByNodeAndKeyword(nodeId, keyword).catch(onPromiseError);
+async function getNodeByKeyword(keyword) {
+  return Node.findByKeyword(keyword).catch(onPromiseError);
 }
 
 async function toggleUserIgnoreBot(userId, ignoreBot) {
@@ -57,29 +51,15 @@ async function handleMessage(socialId, rawMessage) {
     return false;
   }
 
-  const flowEntrance = await getFlowEntrance(message);
+  const node = await getNodeByKeyword(message);
 
-  if (flowEntrance) {
-    if (! flowEntrance.start) return ERROR_MSG;
+  if (! node) {
+    if (! user.position) {
+      return FIRST_MESSAGE;
+    }
 
-    const node = await loadNode(flowEntrance.start);
-    if (! node) return ERROR_MSG;
-
-    await updateUserPosition(user._id, node._id);
-
-    return node.message || ERROR_MSG;
-  }
-
-  if (! user.position) {
     return INCORRECT_KEYWORD_MSG;
   }
-
-  const path = await getPath(user.position.toString(), message);
-
-  if (! path || ! path.to) return ERROR_MSG;
-
-  const node = await loadNode(path.to.toString());
-  if (! node) return ERROR_MSG;
 
   await updateUserPosition(user._id, node._id);
 
